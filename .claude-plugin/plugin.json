@@ -1,0 +1,19 @@
+{
+  "name": "seedance-video",
+  "displayName": "Seedance Video",
+  "version": "1.0.0",
+  "description": "Plan, write and render Seedance 2.5 and 2.0 videos. A skill that plans shots and writes Seedance prompts, plus the AiuniVid MCP server, which quotes the credit cost first, renders 480p drafts and 1080p finals, and chains shots by their last frame.",
+  "author": {
+    "name": "AiuniVid",
+    "url": "https://aiunivid.com"
+  },
+  "homepage": "https://aiunivid.com/en/blog/seedance-claude-skill",
+  "repository": "https://github.com/AiuniVid/seedance-video-skill",
+  "license": "MIT",
+  "icon": "./.claude-plugin/icon.png",
+  "documentationUrl": "https://aiunivid.com/en/docs#mcp",
+  "supportUrl": "https://aiunivid.com/en/contact",
+  "privacyPolicyUrl": "https://aiunivid.com/en/privacy-policy",
+  "termsOfServiceUrl": "https://aiunivid.com/en/terms-of-service",
+  "keywords": ["seedance", "seedance-2.5", "video-generation", "agent-skills", "mcp", "aiunivid"]
+}

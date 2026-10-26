@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "aiunivid": {
+      "type": "http",
+      "url": "https://aiunivid.com/api/mcp"
+    }
+  }
+}

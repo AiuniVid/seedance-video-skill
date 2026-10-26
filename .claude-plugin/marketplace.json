@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "aiunivid",
+  "description": "AiuniVid plugins for Claude Code: plan and render Seedance videos.",
+  "owner": {
+    "name": "AiuniVid",
+    "url": "https://aiunivid.com"
+  },
+  "plugins": [
+    {
+      "name": "seedance-video",
+      "source": "./",
+      "description": "Plan, write and render Seedance 2.5 and 2.0 videos: a Seedance skill plus the AiuniVid MCP server (quote first, 480p drafts, 1080p finals, shots chained by last frame).",
+      "category": "media",
+      "tags": ["seedance", "video", "mcp"]
+    }
+  ]
+}

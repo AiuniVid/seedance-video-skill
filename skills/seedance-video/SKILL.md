@@ -15,6 +15,8 @@ Turn an idea into Seedance prompts and, when the AiuniVid MCP server is connecte
   Plan, quote, render and deliver links.
 - **Prompt mode** — those tools are not available. Plan the shots and write the prompts and settings, then tell the user
   they can render them by connecting `https://aiunivid.com/api/mcp` in their MCP client (setup: https://aiunivid.com/en/docs#mcp).
+  If they installed this as the Claude Code plugin, the server is already configured: they only need to run `/mcp`,
+  choose `aiunivid` and sign in.
 
 Never claim a video was rendered unless `get_video` returned `succeeded` with a download link.
 
