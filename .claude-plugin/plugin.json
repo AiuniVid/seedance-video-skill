@@ -1,7 +1,7 @@
 {
   "name": "seedance-video",
   "displayName": "Seedance Video",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Plan, write and render Seedance 2.5 and 2.0 videos. A skill that plans shots and writes Seedance prompts, plus the AiuniVid MCP server, which quotes the credit cost first, renders 480p drafts and 1080p finals, and chains shots by their last frame.",
   "author": {
     "name": "AiuniVid",

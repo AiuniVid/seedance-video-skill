@@ -59,25 +59,36 @@ Follow `reference/prompt-templates.md`. The rules that matter most:
 
 - Uploaded media with a recognizable **real face is rejected** by the model (nothing is charged).
 - For a realistic or recurring person, either use a verified portrait from `list_characters` (an `asset://` reference),
-  or create a character sheet with `generate_image` first and reuse that image URL.
+  or create a character sheet with `generate_image` and reuse that image URL. `generate_image` is **paid per image**:
+  take its price from `list_models`, include it in the quote (step 5) and call it only after the user's yes.
 - Attach the same character references to every shot that shows the character, and keep re-stating
   "keep face, hair and outfit identical". Describe action and camera, not the face again.
 
-## 5. Quote first, always
+## 5. Quote first, approve in stages
 
-1. For every planned shot, call `quote_video` with the exact settings you will use.
-2. Show the user the cost per shot and the total, in credits (1 credit = USD 0.01).
-3. **Wait for an explicit yes** before any `create_video` or `render_final` call. Never spend beyond the approved total;
-   if a retry or an extra shot is needed, quote it and ask again.
-4. With Seedance 2.5, prefer drafts: `create_video` with `draft: true` renders a cheap 480p preview; call
+`quote_video` needs the real inputs: image-to-video and reference-to-video quotes are rejected without their images.
+A character sheet or the last frame of the previous shot does not exist until an earlier step has run, so approve in stages:
+
+1. **Quote and estimate.** Call `quote_video` with the exact settings for every shot whose inputs already exist.
+   Estimate the others from a quoted shot with the same model, duration, resolution and audio (or from `list_models`),
+   and label them as estimates. Character sheets cost the per-image price of the image model in `list_models`.
+2. Show the user the cost per shot, any image costs and the total, in credits (1 credit = USD 0.01).
+3. **Wait for an explicit yes** before any `create_video`, `render_final` or `generate_image` call.
+4. **Then go stage by stage.** Generate the approved character sheets first. Before each shot that depends on them or on a
+   previous last frame, call `quote_video` with its exact inputs: if it is within the approved amount, render it;
+   if it is higher, stop and ask again. Never spend beyond the approved total; quote and ask again for retries or extra shots.
+5. With Seedance 2.5, prefer drafts: `create_video` with `draft: true` renders a cheap 480p preview; call
    `render_final` only for the drafts the user approves. A draft has to be finalized before `draft_expires_at`.
 
 ## 6. Render and chain
 
 - `create_video`, then poll `get_video` **no more than every 20 seconds**. Typical jobs take 1–5 minutes.
 - To make the next shot start where the last one ended, take `result.last_frame_url` from the finished shot and pass it
-  as the first image (`image_urls[0]`) to an image-to-video model for the next shot. For character continuity in
-  reference-to-video, keep passing the same character references.
+  as the first image (`image_urls[0]`) to an image-to-video model for the next shot. **Only chain this way when no
+  realistic human face is in frame** (stylized or animated characters, products, places): the last frame is a stored copy,
+  so a realistic face in it is checked like an upload and rejected with `real_person_detected`.
+- For a realistic recurring person, do not chain by last frame. Use reference-to-video in every shot with the same
+  verified portrait (`list_characters`) or character sheet, and keep passing those references.
 - If a job fails, its credits are released automatically. Read the error and its hint: change the prompt for
   `prompt_rejected`, change the input for `content_rejected` or `real_person_detected`; do not resend the same request.
 - Media inputs must be public HTTPS URLs.

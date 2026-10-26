@@ -43,6 +43,7 @@ If you already added the server yourself with `claude mcp add`, Claude Code keep
 
 ```bash
 git clone --depth 1 https://github.com/AiuniVid/seedance-video-skill
+mkdir -p ~/.claude/skills
 cp -r seedance-video-skill/skills/seedance-video ~/.claude/skills/
 ```
 

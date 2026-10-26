@@ -66,6 +66,9 @@ No new text, no extra products, no hands.
 
 ## Next shot, continuing from the last frame (image-to-video)
 
+Only when no realistic human face is in frame; for a realistic person, reuse the same portrait or character sheet in
+reference-to-video instead (see SKILL.md, section 6). Quote this shot once the last frame exists.
+
 ```
 Use the uploaded image as the first frame; it is the last frame of the previous shot.
 Keep {the character}'s face, outfit and the lighting unchanged.
